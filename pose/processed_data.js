@@ -2,24 +2,19 @@
 
 class ProcessedData {
     constructor() {
-        this.raw_video_width_list = [];
-        this.raw_video_height_list = [];
-        this.raw_video_fps = 0;
-        
         this.raw_img_list_list = [];
         this.landmarks_3d_list = [];
         this.landmarks_2d_list_list = [];
         this.visibility_score_list_list = [];
     }
 
-    initialize(width_list, height_list, fps, frame_cnt) {
-        this.raw_video_width_list = width_list;
-        this.raw_video_height_list = height_list;
-        this.raw_video_fps = fps;
+    initialize(videoMetaDataList) {
+
+        this.videoMetaDataList = videoMetaDataList;
         
-        this.raw_img_list_list = Array.from({ length: width_list.length }, () => []);
-        this.landmarks_2d_list_list = Array.from({ length: width_list.length }, () => []);
-        this.visibility_score_list_list = Array.from({ length: width_list.length }, () => []);
+        this.raw_img_list_list = Array.from({ length: videoMetaDataList.length }, () => []);
+        this.landmarks_2d_list_list = Array.from({ length: videoMetaDataList.length }, () => []);
+        this.visibility_score_list_list = Array.from({ length: videoMetaDataList.length }, () => []);
 
         // 프레임 수에 맞게 미리 배열 크기를 설정하거나, push()를 사용하여 동적으로 추가할 수 있습니다.
         // 여기서는 동적으로 추가하는 방식으로 구현합니다.
@@ -32,6 +27,10 @@ class ProcessedData {
             this.visibility_score_list_list[i].push(visibility_score_list[i]);
         }
         this.landmarks_3d_list.push(landmarks_3d);
+    }
+
+    get_video_metadata(idx) {
+        return this.videoMetaDataList[idx];
     }
 
     get_frame_cnt() {

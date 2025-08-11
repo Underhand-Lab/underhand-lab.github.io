@@ -1,45 +1,51 @@
 <!DOCTYPE html>
 <html lang="ko">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Underhand Labl | Pose</title>
     <link rel="stylesheet" href="style.css">
-    
+
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .viewer-container { display: flex; flex-direction: column; align-items: center; margin-top: 20px; }
-        #outputCanvas { border: 1px solid #ccc; }
-        #frameSlider { width: 80%; margin-top: 20px; }
-        #frameInfo { margin-top: 10px; font-size: 1.2em; }
+        body {
+            text-align: center;
+        }
     </style>
-    
-    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.9.6/dist/ffmpeg.min.js"></script>
+
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.1/dist/ffmpeg.min.js"></script>
     <script src="./external/coi-serviceworker.js"> </script>
     <!--script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script-->
     <script defer src="main.js" type="module"></script>
-    
+
 </head>
+
 <body>
 
     <div class="container">
-        <h1>동영상 포즈 분석기</h1>
+        <h1>언더핸드 연구소</h1>
+    </div>
 
-        <div class="input-section">
-            <label for="video-files">처리할 동영상 파일 선택:</label>
-            <input type="file" id="video-files" multiple accept="video/*">
-            <p id="file-list-info">선택된 파일 없음</p>
-        </div>
-
-        <button id="process-button" disabled>처리 시작</button>
-        
-        <div id="status-section">
-            <p id="status-message">대기 중...</p>
-            <div id="progress-bar-container">
-                <div id="progress-bar"></div>
+    <div class="container">
+        <details>
+            <summary><h1>새로운 동영상 처리</h1></summary>
+            <div class="input-section">
+                <label for="video-files">처리할 동영상 파일 선택:</label>
+                <input type="file" id="video-files" multiple accept="video/*">
+                <p id="file-list-info">선택된 파일 없음</p>
             </div>
-        </div>
-        
+
+            <button id="process-button" disabled>처리 시작</button>
+
+            <div id="status-section">
+                <p id="status-message">대기 중...</p>
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+            </div>
+        </details>
+    </div>
+    <div class="container">
         <div class="viewer_container">
             <canvas id="outputCanvas"></canvas>
             <input type="range" id="frameSlider" min="0" value="0">
@@ -51,4 +57,5 @@
     </div>
 
 </body>
+
 </html>

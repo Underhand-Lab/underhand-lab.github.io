@@ -2,16 +2,41 @@
 // const kalmanFilter = require('kalmanjs'); // 칼만 필터 라이브러리 가정
 import { PoseLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0";
 
-const MEDIAPIPE_LANDMARK_NAMES = [
-  'nose', 'left_eye_inner', 'left_eye', 'left_eye_outer', 'right_eye_inner',
-  'right_eye', 'right_eye_outer', 'left_ear', 'right_ear', 'mouth_left',
-  'mouth_right', 'left_shoulder', 'right_shoulder', 'left_elbow',
-  'right_elbow', 'left_wrist', 'right_wrist', 'left_pinky',
-  'right_pinky', 'left_index', 'right_index', 'left_thumb',
-  'right_thumb', 'left_hip', 'right_hip', 'left_knee', 'right_knee',
-  'left_ankle', 'right_ankle', 'left_heel', 'right_heel',
-  'left_foot_index', 'right_foot_index'
-];
+const MEDIAPIPE_LANDMARK_NAMES = {
+    0: 'NOSE',
+    1: 'L_EYE_INNER',
+    2: 'L_EYE',
+    3: 'L_EYE_OUTER',
+    4: 'R_EYE_INNER',
+    5: 'R_EYE',
+    6: 'R_EYE_OUTER',
+    7: 'L_EAR',
+    8: 'R_EAR',
+    9: 'L_MOUTH',
+    10: 'R_MOUTH',
+    11: 'L_SHOULDER',
+    12: 'R_SHOULDER',
+    13: 'L_ELBOW',
+    14: 'R_ELBOW',
+    15: 'L_WRIST',
+    16: 'R_WRIST',
+    17: 'L_PINKY',
+    18: 'R_PINKY',
+    19: 'L_INDEX',
+    20: 'R_INDEX',
+    21: 'L_THUMB',
+    22: 'R_THUMB',
+    23: 'L_HIP',
+    24: 'R_HIP',
+    25: 'L_KNEE',
+    26: 'R_KNEE',
+    27: 'L_ANKLE',
+    28: 'R_ANKLE',
+    29: 'L_HEEL',
+    30: 'R_HEEL',
+    31: 'L_FOOT_INDEX',
+    32: 'R_FOOT_INDEX'
+}
 
 export class MediaPipePoseDetector {
 
@@ -24,19 +49,18 @@ export class MediaPipePoseDetector {
             const vision = await FilesetResolver.forVisionTasks(
                 "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
             );
-    
-            console.log("초기화중11");
+            
             this.poseDetector = await PoseLandmarker.createFromOptions(
                 vision, 
                 {
                     baseOptions: {
-                        modelAssetPath: "https://underhand-lab.github.io/pose/external/models/pose_landmarker_full.task"
+                        modelAssetPath: "../external/models/pose_landmarker_full.task"
                     },
-                    // ... 기타 옵션
+                    minPoseDetectionConfidence: 0.3,
+                    minTrackingConfidence: 0.3
                 }
             );
             
-            console.log("초기화중22");
         } catch (error) {
             console.error("PoseLandmarker 초기화 중 오류 발생:", error);
             // 오류가 발생하면 여기에 로그가 출력됩니다.
@@ -68,7 +92,7 @@ export class MediaPipePoseDetector {
                 const visibilityScores = results.landmarks[0].map(l => l.visibility);
                 allVisibilityScores.push(visibilityScores);
             } else {
-                console.warn('Warning: Pose not detected.');
+                //console.warn('Warning: Pose not detected.');
             }
             
         }

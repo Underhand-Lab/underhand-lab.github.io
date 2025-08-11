@@ -14,31 +14,62 @@ export class Processor {
         this.onProgressCallback = onProgress;
     }
 
-    async processVideo(videoPathList) {
-        // MediaPipe 초기화
-        await this.poseDetector.initialize();
+    async processVideo(videoList) {
         await this.videoConverter.load();
-        const videoElements = await this._loadVideos(videoPathList);
 
+        if (this.onProgressCallback) {
+            this.onProgressCallback.onState("준비 중");
+            await new Promise(resolve => setTimeout(resolve, 0));
+        }
+
+        const videoMetaData = this.videoConverter.getVideoMetadata(videoList[0]);
+        const imgBlobList =
+            await this.videoConverter.convert(videoList[0]);
+
+        const data = new ProcessedData();
+
+        /*
         const widthList = videoElements.map(v => v.videoWidth);
         const heightList = videoElements.map(v => v.videoHeight);
         const fps = 30;
 
-        //canvasElement.width = widthList[0];
-        //canvasElement.height = heightList[0];
-
-        const data = new ProcessedData();
         data.initialize(widthList, heightList, fps);
+        */
+
+        const images = [];
+
+        for (const blob of imgBlobList) {
+            const url = URL.createObjectURL(blob);
+            const img = new Image();
+
+            img.src = url;
+            await new Promise(resolve => img.onload = resolve);
+            images.push(img);
+
+        }
+
+        // 모든 작업이 끝난 후 URL 해제
+        imgBlobList.forEach(blob => {
+            const url = URL.createObjectURL(blob);
+            URL.revokeObjectURL(url);
+        });
         
-        console.log("load")
-        // --- 1단계: 동영상에서 모든 프레임 이미지를 추출하여 리스트에 저장 ---
-        // 이 과정이 완료되면 모든 프레임이 imageList에 담깁니다.
-        const allFramesImageList = await this._getAllFramesAsImageList(videoElements);
-        
-        console.log("process")
+        // MediaPipe 초기화
+        await this.poseDetector.initialize();
+
         // --- 2단계: 저장된 프레임 리스트를 순회하며 포즈 처리 및 데이터 저장 ---
+        console.log(images.length);
+        data.initialize([videoMetaData.width], [videoMetaData.height], videoMetaData.fps, images.length);
+        //data.initialize([720], [480], 24, images.length);
+
+        if (this.onProgressCallback) {
+            this.onProgressCallback.onState("처리 중");
+            await new Promise(resolve => setTimeout(resolve, 0));
+        }
+        console.log("process")
         let frameIndex = 0;
-        for (const image of allFramesImageList) {
+
+        for (const image of images) {
             const { landmarks_3d, landmarks_2d_list, visibility_score_list } =
                 await this.poseDetector.process([image]);
 
@@ -46,7 +77,8 @@ export class Processor {
             data.add_data_at([image], landmarks_3d, landmarks_2d_list, visibility_score_list);
 
             if (this.onProgressCallback) {
-                this.onProgressCallback(frameIndex + 1);
+                this.onProgressCallback.onProgress(frameIndex + 1, images.length);
+                await new Promise(resolve => setTimeout(resolve, 0));
             }
 
             frameIndex++;
