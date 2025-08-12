@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Underhand Labl | Pose</title>
+    <title>Underhand Lab | Pose</title>
     <link rel="stylesheet" href="style.css">
 
     <style>
@@ -12,11 +12,11 @@
             text-align: center;
         }
     </style>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.1/dist/ffmpeg.min.js"></script>
     <!--script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script-->
     <script defer src="main.js" type="module"></script>
-
+    
 </head>
 
 <body>
@@ -46,7 +46,8 @@
     </div>
     <div class="container">
         <div class="viewer_container">
-            <canvas id="outputCanvas"></canvas>
+            <canvas id="outputImage"></canvas>
+            <canvas id="outputChart"></canvas>
             <input type="range" id="frameSlider" min="0" value="0">
         </div>
 
