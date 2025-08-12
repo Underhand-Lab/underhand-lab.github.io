@@ -4,67 +4,71 @@ import { PoseLandmarker, FilesetResolver } from "https://cdn.jsdelivr.net/npm/@m
 
 const MEDIAPIPE_LANDMARK_NAMES = {
     0: 'NOSE',
-    1: 'L_EYE_INNER',
-    2: 'L_EYE',
-    3: 'L_EYE_OUTER',
-    4: 'R_EYE_INNER',
-    5: 'R_EYE',
-    6: 'R_EYE_OUTER',
-    7: 'L_EAR',
-    8: 'R_EAR',
-    9: 'L_MOUTH',
-    10: 'R_MOUTH',
-    11: 'L_SHOULDER',
-    12: 'R_SHOULDER',
-    13: 'L_ELBOW',
-    14: 'R_ELBOW',
-    15: 'L_WRIST',
-    16: 'R_WRIST',
-    17: 'L_PINKY',
-    18: 'R_PINKY',
-    19: 'L_INDEX',
-    20: 'R_INDEX',
-    21: 'L_THUMB',
-    22: 'R_THUMB',
-    23: 'L_HIP',
-    24: 'R_HIP',
-    25: 'L_KNEE',
-    26: 'R_KNEE',
-    27: 'L_ANKLE',
-    28: 'R_ANKLE',
-    29: 'L_HEEL',
-    30: 'R_HEEL',
-    31: 'L_FOOT_INDEX',
-    32: 'R_FOOT_INDEX'
+    1: 'L_EYE_INNER', 2: 'L_EYE', 3: 'L_EYE_OUTER',
+    4: 'R_EYE_INNER', 5: 'R_EYE', 6: 'R_EYE_OUTER',
+    7: 'L_EAR', 8: 'R_EAR',
+    9: 'L_MOUTH', 10: 'R_MOUTH',
+    11: 'L_SHOULDER', 12: 'R_SHOULDER',
+    13: 'L_ELBOW', 14: 'R_ELBOW',
+    15: 'L_WRIST', 16: 'R_WRIST',
+    17: 'L_PINKY', 18: 'R_PINKY',
+    19: 'L_INDEX', 20: 'R_INDEX',
+    21: 'L_THUMB', 22: 'R_THUMB',
+    23: 'L_HIP', 24: 'R_HIP',
+    25: 'L_KNEE', 26: 'R_KNEE',
+    27: 'L_ANKLE', 28: 'R_ANKLE',
+    29: 'L_HEEL', 30: 'R_HEEL',
+    31: 'L_FOOT_INDEX', 32: 'R_FOOT_INDEX'
 }
 
 export class MediaPipePoseDetector {
 
     poseDetector = undefined;
 
+    constructor() {
+        this.canvas = document.createElement('canvas');
+    }
+
     async initialize() {
-        console.log("초기화중")
+        console.log("초기화중");
 
         try {
             const vision = await FilesetResolver.forVisionTasks(
                 "https://cdn.jsdelivr.net/npm/@mediapipe/tasks-vision@0.10.0/wasm"
             );
-            
+
             this.poseDetector = await PoseLandmarker.createFromOptions(
-                vision, 
+                vision,
                 {
                     baseOptions: {
-                        modelAssetPath: "https://underhand-lab.github.io/external/models/pose_landmarker_heavy.task"
+                        modelAssetPath: "../external/models/pose_landmarker_heavy.task"
                     },
+                    runningMode: "VIDEO",
                     minPoseDetectionConfidence: 0.3,
                     minTrackingConfidence: 0.3
                 }
             );
-            
+
         } catch (error) {
             console.error("PoseLandmarker 초기화 중 오류 발생:", error);
             // 오류가 발생하면 여기에 로그가 출력됩니다.
         }
+        this.frameIdx = 0;
+
+        /*
+        this.poseDetector = new mpPose.Pose({
+            locateFile: (file) => {
+                return `https://cdn.jsdelivr.net/npm/@mediapipe/pose/${file}`;
+            }
+        });
+
+        this.poseDetector.setOptions({
+            staticImageMode: false,
+            modelComplexity: 2,
+            enableSegmentation: false,
+            minDetectionConfidence: 0.3,
+            minTrackingConfidence: 0.3
+        });/**/
     }
 
     async process(images) {
@@ -79,8 +83,16 @@ export class MediaPipePoseDetector {
         const allVisibilityScores = [];
 
         for (const image of images) {
+            const ctx = this.canvas.getContext('2d');
+            this.canvas.width = image.width;
+            this.canvas.height = image.height;
 
-            const results = await this.poseDetector.detect(image);
+            ctx.drawImage(image, 0, 0, image.width, image.height);
+
+            const results = await this.poseDetector.
+                detectForVideo(this.canvas, this.frameIdx);
+
+            this.frameIdx++;
 
             if (results.landmarks && results.landmarks.length > 0) {
                 const landmarks2d = results.landmarks[0].map(l => [l.x, l.y, l.z]);
@@ -94,17 +106,13 @@ export class MediaPipePoseDetector {
             } else {
                 //console.warn('Warning: Pose not detected.');
             }
-            
+
         }
-        
-        // 여기에 MedianFusion 및 KalmanFilter 로직을 추가
-        // fusedLandmarks3d와 filteredLandmarks3d를 구현 후
-        const filteredLandmarks3d = allWorldLandmarks3d[0] || null; // 임시로 첫 번째 프레임 데이터 사용
-        
+
         // 반환 시 수정된 _numpyToDict 메서드 사용
         return {
             // 필터링된 3D 랜드마크를 변환하여 반환
-            landmarks_3d: this._arrayToDict(filteredLandmarks3d),
+            landmarks_3d: this._arrayToDict(allWorldLandmarks3d[0]),
             // 2D 랜드마크 리스트를 변환하여 반환
             landmarks_2d_list: allRawLandmarks2d.map(arr => this._arrayToDict(arr)),
             // 가시성 점수 리스트를 변환하여 반환

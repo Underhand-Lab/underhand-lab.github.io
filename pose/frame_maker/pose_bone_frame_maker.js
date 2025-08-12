@@ -77,6 +77,9 @@ export class PoseBoneFrameMaker extends IPoseFrameMaker {
         const ctx = canvas.getContext('2d');
         const image = this.raw_img_list[idx];
 
+        canvas.width = canvas.clientWidth;
+        canvas.height = canvas.clientWidth * 0.5;
+
         if (!image) {
             console.error("Image not found at index", idx);
             return;
