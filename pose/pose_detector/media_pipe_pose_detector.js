@@ -54,7 +54,7 @@ export class MediaPipePoseDetector {
                 vision, 
                 {
                     baseOptions: {
-                        modelAssetPath: "https://underhand-lab.github.io/external/models/pose_landmarker_full.task"
+                        modelAssetPath: "https://underhand-lab.github.io/external/models/pose_landmarker_heavy.task"
                     },
                     minPoseDetectionConfidence: 0.3,
                     minTrackingConfidence: 0.3
