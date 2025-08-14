@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
     <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.1/dist/ffmpeg.min.js"></script>
     <!--script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script-->
-    <script defer src="main.js" type="module"></script>
+    <script defer src="pose.js" type="module"></script>
     
 </head>
 
@@ -32,7 +32,7 @@
             <button id="process-button" disabled>처리 시작</button>
 
             <div id="status-section">
-                <p id="status-message">대기 중...</p>
+                <p id="status-message">처리전</p>
                 <div id="progress-bar-container">
                     <div id="progress-bar"></div>
                 </div>
@@ -40,15 +40,25 @@
         </details>
     </div>
     <div class="container">
+        <h1>결과</h1>
         <div class="viewer_container">
             <canvas id="outputImage"></canvas>
             <canvas id="outputChart"></canvas>
             <input type="range" id="frameSlider" min="0" value="0">
         </div>
-
         <div id="download-section" style="display: none;">
             <a id="download-link" href="#" download="processed_data.json">처리된 데이터 다운로드</a>
         </div>
+    </div>
+    <div class="container">
+        <details>
+            <summary><h1>분석 설정</h1></summary>
+            <select name="languages" id="analysis">
+                <option value="joint">관절 각도</option>
+                <option value="velocity">관절 속도</option>
+                <option value="height">관절 높이</option>
+            </select>
+        </details>
     </div>
 
 </body>

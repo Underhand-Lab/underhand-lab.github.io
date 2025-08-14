@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Underhand Lab | Track</title>
+    <link rel="stylesheet" href="../style.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js@3.7.1/dist/chart.min.js"></script>
+    <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.1/dist/ffmpeg.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest"></script>
+    <!--script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script-->
+    <script defer src="track.js" type="module"></script>
+
+</head>
+
+<body>
+
+    <div class="container">
+        <h1>추적</h1>
+    </div>
+
+    <div class="container">
+        <details>
+            <summary>
+                <h1>새로운 동영상 처리</h1>
+            </summary>
+            <div class="input-section">
+                <label for="video-files">처리할 동영상 파일 선택:</label>
+                <input type="file" id="video-files" multiple accept="video/*">
+                <p id="file-list-info">선택된 파일 없음</p>
+            </div>
+
+            <button id="process-button" disabled>처리 시작</button>
+
+            <div id="status-section">
+                <p id="status-message">처리전</p>
+                <div id="progress-bar-container">
+                    <div id="progress-bar"></div>
+                </div>
+            </div>
+        </details>
+    </div>
+    <div class="container">
+        <h1>결과</h1>
+        <div class="viewer_container">
+            <canvas id="outputImage"></canvas>
+            <div>
+                <label for="confInput">CONF</label>
+                <input type="number" id="confInput" value="0.01" min="0" max="1" step="0.01">
+            </div>
+            <div id="dataText">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>속도</th>
+                            <th>각도</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>? km/h</td>
+                            <td>? 도</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <input type="range" id="frameSlider" min="0" value="0">
+        </div>
+        <div id="download-section" style="display: none;">
+            <a id="download-link" href="#" download="processed_data.json">처리된 데이터 다운로드</a>
+        </div>
+    </div>
+
+</body>
+
+</html>

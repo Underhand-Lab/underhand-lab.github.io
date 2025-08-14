@@ -27,14 +27,6 @@ export class GraphFrameMaker extends IPoseFrameMaker {
         this.canvas = canvas;
     }
 
-    set_data(data) {
-
-        this.data = data;
-
-        console.log(data);
-
-    }
-
     get_data_set() {
 
         if (this.data == null) return null;
@@ -58,6 +50,21 @@ export class GraphFrameMaker extends IPoseFrameMaker {
             (_, index) => index);
 
         return [ret, labels];
+    }
+
+    set_data(data) {
+
+        this.data = data;
+        console.log(data);
+
+        if (this.chart != null) {
+            let [dataset, labels] = this.get_data_set();
+
+            this.chart.data["labels"] = labels;
+            this.chart.data.datasets = dataset;
+        }
+        
+
     }
 
     draw_img_at(idx, canvas) {
