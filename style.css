@@ -30,6 +30,7 @@ body {
 a, a:visited {
     text-decoration: none;
     color: #333;
+    white-space: nowrap;
 }
 
 input {
