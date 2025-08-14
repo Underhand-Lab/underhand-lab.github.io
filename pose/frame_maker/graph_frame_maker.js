@@ -25,6 +25,7 @@ export class GraphFrameMaker extends IPoseFrameMaker {
         super();
         this.target_idx = 0;
         this.canvas = canvas;
+        Chart.defaults.font.family = 'KBO-Dia-Gothic_medium', 'Arial', 'sans-serif';
     }
 
     get_data_set() {
@@ -55,7 +56,6 @@ export class GraphFrameMaker extends IPoseFrameMaker {
     set_data(data) {
 
         this.data = data;
-        console.log(data);
 
         if (this.chart != null) {
             let [dataset, labels] = this.get_data_set();
