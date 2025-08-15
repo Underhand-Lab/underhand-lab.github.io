@@ -29,8 +29,7 @@ body {
 
 a, a:visited {
     text-decoration: none;
-    color: #333;
-    white-space: nowrap;
+    color: inherit;
 }
 
 input {
@@ -93,6 +92,14 @@ th, td {
 
 th {
   background-color: #f2f2f2; /* 헤더 배경색 */
+}
+
+.text-left {
+    text-align: left;
+}
+
+.text-right {
+    text-align: right;
 }
 
 .container {
