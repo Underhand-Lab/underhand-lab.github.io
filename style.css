@@ -4,6 +4,12 @@
     font-weight: 500;
     font-style: normal;
 }
+@font-face {
+    font-family: 'KBO-Dia-Gothic_Bold';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 500;
+    font-style: normal;
+}
 
 ul {
     list-style-type: none;

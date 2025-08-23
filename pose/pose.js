@@ -21,7 +21,6 @@ const analysisSelect = document.getElementById('analysis');
 
 // PoseFrameMaker 인스턴스
 const poseFrameMaker = new PoseBoneFrameMaker();
-//const poseFrameMaker = new RawFrameMaker();
 const graphFrameMaker = new GraphFrameMaker();
 
 const analysisTool = {
@@ -46,6 +45,8 @@ function updateImage() {
     graphFrameMaker.draw_img_at(frameIdx, canvasChart);
 
 }
+
+graphFrameMaker.set_default(canvasChart);
 
 function set_data(data) {
 

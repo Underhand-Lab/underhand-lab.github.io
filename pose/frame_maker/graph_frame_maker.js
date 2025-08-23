@@ -63,8 +63,29 @@ export class GraphFrameMaker extends IPoseFrameMaker {
             this.chart.data["labels"] = labels;
             this.chart.data.datasets = dataset;
         }
-        
 
+
+    }
+
+    set_default(canvas) {
+        const ctx = canvas.getContext('2d');
+        this.chart = new Chart(ctx, {
+            type: 'line',
+            data: {
+                "labels": ["0"],
+                datasets: [{
+                    "label": "처리전",
+                    "data": [0]
+                }]
+            },
+            options: {
+                animation: false,
+                plugins: {
+                    hideAfterIndex: { idx: 0 }
+                }
+            },
+            plugins: [hideAfterIndexPlugin]
+        });
     }
 
     draw_img_at(idx, canvas) {
@@ -90,7 +111,7 @@ export class GraphFrameMaker extends IPoseFrameMaker {
                 },
                 plugins: [hideAfterIndexPlugin]
             });
-            
+
         } else {
             this.chart.options.plugins.hideAfterIndex.idx = idx;
             this.chart.update();
@@ -101,8 +122,8 @@ export class GraphFrameMaker extends IPoseFrameMaker {
 }
 
 function getRandomColor() {
-  let red = Math.floor(Math.random() * 256);
-  let green = Math.floor(Math.random() * 256);
-  let blue = Math.floor(Math.random() * 256);
-  return `rgb(${red}, ${green}, ${blue})`;
+    let red = Math.floor(Math.random() * 256);
+    let green = Math.floor(Math.random() * 256);
+    let blue = Math.floor(Math.random() * 256);
+    return `rgb(${red}, ${green}, ${blue})`;
 }

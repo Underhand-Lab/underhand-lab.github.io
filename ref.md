@@ -1,0 +1,5 @@
+- [Google Mediapipe](https://ai.google.dev/edge/mediapipe/solutions/guide?hl=ko): 동작 인식(🤸‍♀️)
+- [Ultralytics YOLO11](https://docs.ultralytics.com/models/yolo11/): 공 인식(⚾️)
+- [Chart.js](https://www.chartjs.org/): 정보 시각화(📊)
+- [FFmpeg](https://ffmpeg.org/): 전처리(🖼️)
+- [롯데자이언츠 자이언츠체](https://www.giantsclub.com/html/?pcode=1007): 글꼴
