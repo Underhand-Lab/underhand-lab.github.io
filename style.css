@@ -17,7 +17,7 @@ ol {
 
 }
 
-ol li {
+ol li, ul li {
     margin: 15px auto;
 }
 
