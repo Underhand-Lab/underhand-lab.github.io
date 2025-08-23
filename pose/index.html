@@ -11,6 +11,8 @@
     <script src="https://unpkg.com/@ffmpeg/ffmpeg@0.11.1/dist/ffmpeg.min.js"></script>
     <!--script src="https://cdn.jsdelivr.net/npm/@ffmpeg/ffmpeg@0.12.6/dist/umd/ffmpeg.js"></script-->
     <script defer src="pose.js" type="module"></script>
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+    <script src="../markdown.js"></script>
 
 </head>
 
@@ -20,7 +22,7 @@
             <a href="..">언더핸드 연구소</a>
         </div>
         <div style="flex-grow: 1">
-            <ul>
+            <ul class="nav">
                 <li style="color:#6799fa">
                     <a href="../pose">자세 분석</a>
                 </li>
@@ -74,6 +76,15 @@
                     <option value="velocity">관절 속도</option>
                     <option value="height">관절 높이</option>
                 </select>
+            </div>
+        </details>
+    </div>
+    
+    <div class="container">
+        <details>
+            <summary><h1>참고</h1></summary>
+            <div class="markdown-container"
+                data-markdown-file="./guide.md">
             </div>
         </details>
     </div>
