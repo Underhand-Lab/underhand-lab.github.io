@@ -1,4 +1,4 @@
-const yolo11x_weight = "../../external/yolo11x_web_model/model.json";
+const yolo11x_weight = "/external/yolo11x_web_model/model.json";
 
 async function createDetector() {
     return tf.loadGraphModel(yolo11x_weight);

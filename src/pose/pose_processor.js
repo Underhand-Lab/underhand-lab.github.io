@@ -1,6 +1,6 @@
 // processor.js
 import { ProcessedData } from './pose_processed_data.js';
-import { FFMPEGVideoConverter } from '../video_to_img_list/ffmpeg_video_to_img_list.js'
+import { FFMPEGVideoConverter } from '/src/video_to_img_list/ffmpeg_video_to_img_list.js'
 
 export class PoseProcessor {
 

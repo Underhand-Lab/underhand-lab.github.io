@@ -1,11 +1,7 @@
-import { MediaPipePoseDetector } from './pose_detector/media_pipe_pose_detector.js';
-import { RawFrameMaker } from './frame_maker/raw_frame_maker.js';
-import { PoseBoneFrameMaker } from './frame_maker/pose_bone_frame_maker.js';
-import { PoseProcessor } from './pose_processor.js';
-import { GraphFrameMaker } from './frame_maker/graph_frame_maker.js';
-import { AngleAnalysisTool } from './analysis_tool/angle_analysis_tool.js';
-import { HeightAnalysisTool } from './analysis_tool/height_analysis_tool.js';
-import { VelocityAnalysisTool } from './analysis_tool/velocity_analysis_tool.js';
+import * as PoseDetector from '/src/pose/pose_detector/index.js';
+import * as PoseFrameMaker from '/src/pose/frame_maker/index.js';
+import * as PoseAnalysis from "/src/pose/analysis_tool/index.js";
+import { PoseProcessor } from '/src/pose/pose_processor.js';
 
 // DOM 요소 가져오기
 const canvasImage = document.getElementById('outputImage');
@@ -20,13 +16,14 @@ const progressBar = document.getElementById('progress-bar');
 const analysisSelect = document.getElementById('analysis');
 
 // PoseFrameMaker 인스턴스
-const poseFrameMaker = new PoseBoneFrameMaker();
-const graphFrameMaker = new GraphFrameMaker();
+const poseFrameMaker = new PoseFrameMaker.PoseBoneFrameMaker(canvasImage);
+//const poseFrameMaker = new PoseFrameMaker.Pose3DFrameMaker(canvasImage);
+const graphFrameMaker = new PoseFrameMaker.GraphFrameMaker(canvasChart);
 
 const analysisTool = {
-    "joint": new AngleAnalysisTool(),
-    "velocity": new VelocityAnalysisTool(),
-    "height": new HeightAnalysisTool(),
+    "joint": new PoseAnalysis.AngleAnalysisTool(),
+    "velocity": new PoseAnalysis.VelocityAnalysisTool(),
+    "height": new PoseAnalysis.HeightAnalysisTool(),
 }
 
 slider.max = 0;
@@ -73,7 +70,7 @@ processButton.addEventListener('click', async () => {
 
     // 프로세서 및 탐지기 초기화
     const processor = new PoseProcessor();
-    const detector = new MediaPipePoseDetector();
+    const detector = new PoseDetector.MediaPipePoseDetector();
 
     // 프로세서 설정 및 비디오 처리
     try {

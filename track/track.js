@@ -1,7 +1,7 @@
-import { TrackProcessor } from './track_processor.js';
-import { YOLO11BallDetector } from './ball_detector/yolo11_ball_detector.js';
-import { TrackFrameMaker } from './frame_maker/track_frame_maker.js';
-import { calcVelocity, calcAngle } from './calc/velocity.js';
+import { TrackProcessor } from '/src/track/track_processor.js';
+import * as BallDetector from '/src/track/ball_detector/index.js';
+import * as TrackFrameMaker from '/src/track/frame_maker/track_frame_maker.js';
+import * as Calc from '/src/track/calc/velocity.js';
 
 // DOM 요소 가져오기
 const canvasImage = document.getElementById('outputImage');
@@ -18,8 +18,8 @@ slider.max = 0;
 
 // 로드된 비디오 데이터를 저장할 변수
 let processedData = null;
-const detector = new YOLO11BallDetector();
-const frame_maker = new TrackFrameMaker();
+const detector = new BallDetector.YOLO11BallDetector();
+const frame_maker = new TrackFrameMaker.TrackFrameMaker();
 
 // 슬라이더를 움직일 때마다 이미지를 업데이트하는 함수
 function updateImage() {
@@ -37,12 +37,12 @@ function updateImage() {
 
     if (frameIdx > 0) {
 
-        velocity = calcVelocity(
+        velocity = Calc.calcVelocity(
             processedData["ballData"][frameIdx - 1],
             processedData["ballData"][frameIdx],
             processedData["metaData"]["fps"], confInput.value);
 
-        angle = calcAngle(
+        angle = Calc.calcAngle(
             processedData["ballData"][frameIdx - 1],
             processedData["ballData"][frameIdx], confInput.value);
 
