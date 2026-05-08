@@ -1,6 +1,6 @@
 <!-- Navigation -->
 <nav id="navbar" class="navbar navbar-fixed-top modern-nav">
-  <div class="container" style="display: flex; flex-direction: row; flex-wrap: nowrap;">
+  <div class="container" style="display: flex; flex-direction: row; flex-wrap: nowrap; gap: 50px;">
     <div class="navbar-header page-scroll" style="flex: 1">
       <a class="navbar-brand-modern" href="{{ site.baseurl }}/">
         <div id="nav-icon-box">
@@ -11,7 +11,7 @@
     </div>
 
     <div class="navbar-menu-visible" id="bs-example-navbar-collapse-1">
-      <ul class="nav navbar-nav navbar-right" style="flex: 1; padding-left: 50px">
+      <ul class="nav navbar-nav style="flex: 1; padding-left: 50px">
         {% assign nav_items = page.navigation | default: site.data.navigation %}
         {% for item in nav_items %}
         {% comment %} 현재 페이지가 홈페이지인지, 링크가 내부 앵커인지 판별 {% endcomment %}

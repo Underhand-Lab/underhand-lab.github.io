@@ -15,15 +15,8 @@
 }
 
 .navbar-header {
+    position: relative; /* 가상 요소 배치를 위한 기준점 */
     z-index: 10; /* 메뉴보다 위에 오도록 설정 */
-    padding-right: 50px; /* 그라데이션이 적용될 여유 공간 */
-    background-color: var(--glass-bg) !important;
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px); /* Safari 지원 */
-    
-    /* 그라데이션 마스크: 오른쪽 끝 50px 구간에서 배경과 블러가 부드럽게 사라짐 */
-    -webkit-mask-image: linear-gradient(to right, black calc(100% - 50px), transparent 100%);
-    mask-image: linear-gradient(to right, black calc(100% - 50px), transparent 100%);
 }
 
 .navbar {
@@ -38,6 +31,9 @@
 
 .navbar .navbar-nav {
     letter-spacing: 0.5px;
+    /* 메뉴 리스트 양끝에 마스크 적용 */
+    -webkit-mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
+    mask-image: linear-gradient(to right, transparent, black 30px, black calc(100% - 30px), transparent);
 }
 
 .navbar .navbar-nav li a:focus {
@@ -152,7 +148,6 @@
 .navbar-menu-visible {
     align-items: center;
     overflow-x: auto;
-    margin-left: -50px; /* 헤더의 마스크 영역과 겹치도록 왼쪽으로 당김 */
     display: flex;
     -ms-overflow-style: none;  /* IE and Edge */
     scrollbar-width: none;  /* Firefox */
@@ -477,15 +472,6 @@
     .navbar-fixed-bottom .navbar-collapse {
         max-height: 200px
     }
-}
-
-.container>.navbar-header,
-.container-fluid>.navbar-header,
-.container>.navbar-collapse,
-.container-fluid>.navbar-collapse {
-    margin-right: -15px;
-    margin-left: -15px;
-    
 }
 
 @media (min-width:768px) {

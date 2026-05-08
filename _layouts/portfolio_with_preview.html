@@ -3,8 +3,8 @@ layout: default
 ---
 <section class="portfolio">
   <div class="container">
-    <ul class="text-center">
-      {% for tag in page.tag %}
+    <ul class="text-center blog-tags-list">
+      {% for tag in page.tags %}
       <li class="blog-tag">{{ tag }}</li>
       {% endfor %}
     </ul>
@@ -19,24 +19,24 @@ layout: default
             <ul class="splide__list">
               {% for card in cards offset:1 %}
               {% assign parts = card | split: '-->' %}
-              <li class="splide__slide">
-                <div class="card">
-                  <h2>{{ parts[0] | strip }}</h2>
-                  <div class="card-content">
-                    {{ parts[1] }}
-                  </div>
-                </div>
-              </li>
-              {% endfor %}
-            </ul>
+        <li class="splide__slide">
+          <div class="card">
+            <h2>{{ parts[0] | strip }}</h2>
+            <div class="card-content">
+              {{ parts[1] }}
+            </div>
           </div>
-        </div>
-      </div>
-      
-      <div markdown="1" class="left text-left">
-        {{ page.preview }}
+        </li>
+        {% endfor %}
+        </ul>
       </div>
     </div>
+  </div>
+
+  <div markdown="1" class="left text-left">
+    {{ page.preview }}
+  </div>
+  </div>
   </div>
   <div class="container text-center">
     <ul class="list-inline item-details">
