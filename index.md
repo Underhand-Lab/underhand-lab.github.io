@@ -48,6 +48,8 @@ navigation:
 <!-- 프로젝트 섹션 (데이터 기반 자동 생성) -->
 {% assign main_tags = site.data.portfolio | map: "tag" %}
 
+{% include contact.html %}
+
 {% for category in site.data.portfolio %}
 <section id="portfolio" class="section portfolio-grid">
   <div class="container">
@@ -70,4 +72,3 @@ navigation:
 </section>
 
 script src="script.js"></script-->
-{% include contact.html %}

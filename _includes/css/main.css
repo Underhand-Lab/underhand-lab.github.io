@@ -6,10 +6,17 @@
 
 /* https://noonnu.cc/font_page/918#google_vignette */
 @font-face {
-    font-family: 'EarlyFontDiary';
-    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_220508@1.0/EarlyFontDiary.woff2') format('woff2');
-    font-weight: normal;
-    font-style: normal;
+    font-family: 'Giants';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Regular.woff2') format('woff2');
+    font-weight: 400;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Giants';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2307-1@1.1/Giants-Bold.woff2') format('woff2');
+    font-weight: 700;
+    font-display: swap;
 }
 
 /* Modern Theme Variables & Overrides */
@@ -34,7 +41,7 @@
 html,
 body {
     overflow-x: hidden;
-    font-family: 'Pretendard', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
+    font-family: 'Giants', -apple-system, BlinkMacSystemFont, system-ui, Roboto, sans-serif;
     scroll-behavior: smooth;
 }
 
@@ -62,7 +69,7 @@ h3,
 h4,
 h5,
 h6 {
-    font-family: 'Pretendard', Montserrat, sans-serif;
+    font-family: 'Giants', Montserrat, sans-serif;
     font-weight: 700;
     text-align: left;
     /* 좌측 정렬로 변경 */
@@ -142,7 +149,7 @@ header img {
 header .intro-text .name {
     display: block;
     text-transform: uppercase;
-    font-family: Montserrat, "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-family: "Giants", Helvetica, Arial, sans-serif;
     font-size: 2em;
     font-weight: 700;
 }
