@@ -14,6 +14,6 @@ image: portfolio/cv-val.png
 
 ---
 
-[<i class="fa-brands fa-windows"></i> Windows](https://github.com/underhand-lab/cv-val/releases/download/v0.0.1-alpha/CV-Val.Setup.0.0.1.exe)
-[<i class="fa-brands fa-apple"></i> macOS](https://github.com/underhand-lab/cv-val/releases/download/v0.0.1-alpha/CV-Val-0.0.1-arm64.dmg)
+[<i class="fa-brands fa-windows"></i> Windows](https://github.com/underhand-lab/cv-val/releases/latest/download/CV-Val.exe)
+[<i class="fa-brands fa-apple"></i> macOS](https://github.com/underhand-lab/cv-val/releases/latest/download/CV-Val.dmg)
 [<i class="fa-brands fa-chrome"></i> Web](https://underhand-lab.github.io/cv-val)
