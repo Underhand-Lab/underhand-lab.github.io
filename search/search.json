@@ -1,0 +1,16 @@
+---
+layout: none
+---
+[
+  {% assign posts = site.posts | concat: site.pages %}
+  {% assign tagged_items = posts | where_exp: "item", "item.tags" %}
+  {% for item in tagged_items %}
+    {
+      "title": {{ item.title | jsonify }},
+      "url": {{ item.url | relative_url | jsonify }},
+      "tags": {{ item.tags | jsonify }},
+      "thumbnail": {% if item.thumbnail %}{{ item.thumbnail | prepend: "/img/portfolio/" | relative_url | jsonify }}{% else %}null{% endif %},
+      "summary": {{ item.summary | jsonify }}
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+]

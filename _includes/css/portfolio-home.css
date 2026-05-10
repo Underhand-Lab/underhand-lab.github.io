@@ -124,6 +124,10 @@ li.blog-tag:hover {
     transform: translateY(-1px);
 }
 
+li.blog-tag > a {
+    color : white;
+}
+
 .blog-home-row {
     padding: 10px;
     max-width: 400px;

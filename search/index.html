@@ -1,0 +1,30 @@
+---
+layout: default
+title: Tag Search
+---
+<section class="section portfolio-grid">
+    <div class="container">
+        <div class="search-page-header text-center" style="margin-bottom: 40px;">
+            <div class="search-bar-wrapper" style="position: relative; max-width: 500px; margin: 0 auto;">
+                <i class="fa fa-search" style="position: absolute; left: 20px; top: 50%; transform: translateY(-50%); color: var(--accent-color); opacity: 0.7;"></i>
+                <input type="text" id="search-input" class="form-control" placeholder="찾으시는 키워드를 입력하세요..." style="background: var(--card-bg); border: 1px solid var(--border-color); color: var(--text-primary); padding: 1.2rem 1.2rem 1.2rem 3.5rem; border-radius: 50px; width: 100%; outline: none; transition: all 0.3s ease; box-shadow: 0 10px 30px rgba(0,0,0,0.1);">
+            </div>
+            <h2 id="search-title" class="section-title" style="margin-top: 40px; margin-bottom: 0; display: none;">태그 검색</h2>
+        </div>
+        <div id="search-status" class="text-center"></div>
+        <div id="search-results" class="portfolio-flex-row mt-5">
+            <!-- 검색 결과가 여기에 주입됩니다 -->
+        </div>
+    </div>
+</section>
+
+<!-- 디자인 동기화를 위한 템플릿 -->
+<template id="portfolio-card-template">
+    {% include portfolio_card.html 
+        url="{url}" 
+        summary="{summary}" 
+        title="{title}" 
+        thumbnail="{thumbnail}" %}
+</template>
+
+<script src="{{ '/search/search.js' | relative_url }}"></script>

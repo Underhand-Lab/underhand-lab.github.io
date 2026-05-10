@@ -14,20 +14,11 @@
       {% unless post.tags contains include.tag %}{% continue %}{% endunless %}
     {% endif %}
 
-    <div class="portfolio-flex-item portfolio-item">
-      <a href="{{ post.url | relative_url }}" title="{{ post.summary }}" class="portfolio-link">
-        <div class="portfolio-inner">
-          <div class="box-modal">
-            <div class="caption">
-              <div class="caption-content">
-                <i class="fa fa-search-plus fa-1.5x"></i>
-              </div>
-            </div>
-            <img src="{{ site.baseurl }}/img/portfolio/{{ post.thumbnail }}" class="img-modal" alt="{{ post.title }}">
-          </div>
-        </div>
-        <p class="portfolio-txt">{{ post.title }}</p>
-      </a>
-    </div>
+    {% assign thumb_path = post.thumbnail | prepend: "/img/portfolio/" | relative_url %}
+    {% include portfolio_card.html 
+        url=post.url 
+        summary=post.summary 
+        title=post.title 
+        thumbnail=thumb_path %}
   {% endfor %}
 </div>

@@ -5,7 +5,9 @@ layout: default
     <div class="container">
       <ul class="text-center blog-tags-list">
         {% for tag in page.tags %}
-        <li class="blog-tag">{{ tag }}</li>
+        <li class="blog-tag">
+          <a href="{{ '/search/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>
+        </li>
         {% endfor %}
       </ul>
       <h1>{{ page.title }}</h1>

@@ -1,2 +1,4 @@
 - name: 소개
   link: /
+- name: 검색
+  link: /search

@@ -275,7 +275,7 @@ form .row:first-child .floating-label-form-group {
 #wrapper {
     padding: 0;
     height: auto;
-    min-height: calc(100% - 80px);
+    min-height: calc(100vh - 160px);
 }
 
 footer {
