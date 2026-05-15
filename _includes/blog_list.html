@@ -1,0 +1,13 @@
+<div class="blog-post-list">
+  {% assign blog_posts = site.posts | where_exp: "item", "item.tags contains 'blog'" %}
+  {% if blog_posts.size > 0 %}
+    {% for post in blog_posts %}
+      <a href="{{ post.url | relative_url }}" class="blog-post-item">
+        <span class="blog-post-date">{{ post.date | date: "%Y.%m.%d" }}</span>
+        <span class="blog-post-title">{{ post.title }}</span>
+      </a>
+    {% endfor %}
+  {% else %}
+    <p class="text-center" style="color: var(--text-secondary);">아직 게시된 포스팅이 없습니다.</p>
+  {% endif %}
+</div>

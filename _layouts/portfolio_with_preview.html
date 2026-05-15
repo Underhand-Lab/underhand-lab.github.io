@@ -1,42 +1,48 @@
 ---
 layout: default
 ---
-<section class="portfolio">
+<style>
+</style>
+
+<section class="portfolio-section">
   <div class="container">
-    <ul class="text-center blog-tags-list">
-      {% for tag in page.tags %}
-      <li class="blog-tag">
-        <a href="{{ '/search/' | relative_url }}?tag={{ tag | url_encode }}">{{ tag }}</a>
-      </li>
-      {% endfor %}
-    </ul>
-    <h1>{{ page.title }}</h1>
-    <div class="portfolio">
-      <div markdown="1" class="right text-left">
-        {% capture content %}{{ page.content | markdownify }}{% endcapture %}
-        {% assign cards = content | split: '<!-- card:' %}
-        
-        <div id="carousel" class="splide">
-          <div class="splide__track">
-            <ul class="splide__list">
-              {% for card in cards offset:1 %}
-              {% assign parts = card | split: '-->' %}
-        <li class="splide__slide">
-          <div class="card">
-            <h2>{{ parts[0] | strip }}</h2>
-            <div class="card-content">
-              {{ parts[1] }}
-            </div>
-          </div>
+    <div class="text-center mb-5">
+      <ul class="blog-tags-list">
+        {% for tag in page.tags %}
+        <li class="blog-tag">
+          <a href="{{ '/search/' | relative_url }}?tag={{ tag | url_encode }}">#{{ tag }}</a>
         </li>
         {% endfor %}
+      </ul>
+      <h1 class="display-4">{{ page.title }}</h1>
+    </div>
+
+    <div class="portfolio-wrapper">
+      <!-- 상세 슬라이더 (HTML상 먼저 위치하여 모바일 상단 배치) -->
+      <div class="portfolio-right-content text-left">
+        {% assign cards = page.content | split: '<!-- card:' %}
+        <div id="portfolio-splide-v2" class="splide">
+          <div class="splide__track">
+            <ul class="splide__list">
+              {% for card_raw in cards offset:1 %}
+                {% assign parts = card_raw | split: '-->' %}
+                <li class="splide__slide">
+                  <div class="portfolio-card">
+                    <h2>{{ parts[0] | strip }}</h2>
+                    <div class="portfolio-body">
+                      {{ parts[1] | markdownify }}
+                    </div>
+                  </div>
+                </li>
+              {% endfor %}
         </ul>
       </div>
     </div>
   </div>
 
-  <div markdown="1" class="left text-left">
-    {{ page.preview }}
+  <!-- 미리보기 영역 -->
+  <div class="portfolio-left-preview text-left">
+    {{ page.preview | markdownify }}
   </div>
   </div>
   </div>
@@ -59,19 +65,15 @@ layout: default
     </ul>
   </div>
 </section>
+
 <script>
   document.addEventListener('DOMContentLoaded', function () {
-    new Splide('#carousel', {
+    new Splide('#portfolio-splide-v2', {
       type: 'slide',
       perPage: 1,
       arrows: true,
       pagination: true,
-      gap: '1rem',
-      breakpoints: {
-        768: {
-          perPage: 1,
-        },
-      },
+      gap: '2rem'
     }).mount();
   });
 </script>
