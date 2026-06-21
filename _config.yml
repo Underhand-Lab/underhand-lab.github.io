@@ -33,13 +33,13 @@ color:
 
 # Footer settings
 footer:
-  copyright: 이지헌 (EasyH)
+  copyright: Chess Freak
   location: Location
   social: Social
   credits: Credits
 
 # Credits content
-credits: 'Developed by Lee Ji-Heon (EasyH)'
+credits: 'Developed by Chess Freak'
 
 # Build settings
 markdown: kramdown

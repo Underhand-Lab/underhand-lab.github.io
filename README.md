@@ -1,7 +1,7 @@
-Easy-H Portfolio Theme
+Underpromotion Theme
 =========================
 
-게임 개발자를 위한 Jekyll 기반의 포트폴리오 블로그 테마입니다.
+개발자를 위한 Jekyll 기반의 포트폴리오 블로그 테마입니다.
 **Soft UI / Glassmorphism** 스타일의 현대적인 디자인과 프로젝트 전시에 최적화된 기능을 제공합니다.
 
 ## ✨ 주요 특징
@@ -14,6 +14,14 @@ Easy-H Portfolio Theme
 ### 필수 요구 사항
 - Ruby 3.2.2 이상
 - Bundler & Jekyll
+
+### Bundler 오류가 날 때
+`bundler ~> 2.0` 제약 때문에 최신 Bundler(예: 4.x)에서 설치가 막히면, 이 저장소는 Bundler 2.x 이상에서 동작하도록 설정되어 있습니다. 그래도 로컬 환경이 꼬여 있다면 아래처럼 실행하면 됩니다.
+
+```bash
+gem install bundler -v 2.7.2
+bundle _2.7.2_ install
+```
 
 ### 설치 및 실행
 1. 저장소를 클론합니다.
@@ -50,7 +58,7 @@ social:                          # 프로젝트 관련 링크들
 ```
 
 ## Demo
-View this jekyll theme in action [here](https://easy-h.github.io/portfolio)
+View this jekyll theme in action [here](https://chess-freak.github.io/underpromotion/)
 
 <!--
 ## Screenshot
