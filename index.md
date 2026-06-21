@@ -32,7 +32,7 @@ navigation:
   </div>
 </section>
 
-<section id="about-cv-val" class="section">
+<section id="about-cv" class="section">
   <div class="container">
     {% include about.html title="CV-Val" image_pos="right" %}
   </div>
