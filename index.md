@@ -28,13 +28,13 @@ navigation:
 <!-- 자기소개 섹션 -->
 <section id="about" class="section">
   <div class="container">
-    {% include about.html image_pos="right" %}
+    {% include about.html %}
   </div>
 </section>
 
-<section id="about-chess-freak" class="section">
+<section id="about-cv-val" class="section">
   <div class="container">
-    {% include about.html title="chess-freak" %}
+    {% include about.html title="CV-Val" image_pos="right" %}
   </div>
 </section>
 
